@@ -157,18 +157,6 @@ export default function HomePage() {
                 </ul>
               </Paper>
             </Box>
-
-            <Box mt={2} textAlign="center">
-              <Button
-                variant="contained"
-                size="medium"
-                startIcon={<AddIcon />}
-                onClick={handleNuevaInscripcion}
-                sx={{ px: 3, py: 1 }}
-              >
-                Comenzar Inscripción
-              </Button>
-            </Box>
           </CardContent>
         </Card>
 
