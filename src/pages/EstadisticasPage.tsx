@@ -36,7 +36,6 @@ const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#06b6d4'
 export default function EstadisticasPage() {
   const navigate = useNavigate();
 
-  // Query para obtener todas las inscripciones
   const { data: inscripciones = [] } = useQuery({
     queryKey: ['inscripciones'],
     queryFn: async () => {
@@ -46,10 +45,9 @@ export default function EstadisticasPage() {
     },
   });
 
-  // Calcular estadísticas
   const totalInscritos = inscripciones.length;
 
-  // Inscripciones por escuela
+
   const inscripcionesPorEscuela: Record<string, number> = inscripciones.reduce((acc: Record<string, number>, insc: Inscripcion) => {
     const escuela = insc.nombreEscuela || 'Sin escuela';
     acc[escuela] = (acc[escuela] || 0) + 1;
@@ -61,7 +59,7 @@ export default function EstadisticasPage() {
     cantidad: cantidad as number,
   }));
 
-  // Inscripciones por cinturón
+ 
   const inscripcionesPorCinturon: Record<string, number> = inscripciones.reduce((acc: Record<string, number>, insc: Inscripcion) => {
     const cinturon = insc.gradoCinturon || 'Sin grado';
     acc[cinturon] = (acc[cinturon] || 0) + 1;
@@ -73,7 +71,7 @@ export default function EstadisticasPage() {
     cantidad: cantidad as number,
   }));
 
-  // Distribución por edad
+
   const distribucionEdad: Record<string, number> = inscripciones.reduce((acc: Record<string, number>, insc: Inscripcion) => {
     const edad = insc.edad;
     let rango = '';
@@ -92,17 +90,17 @@ export default function EstadisticasPage() {
     cantidad: cantidad as number,
   }));
 
-  // Promedio de edad
+  
   const promedioEdad = inscripciones.length > 0
     ? (inscripciones.reduce((sum: number, insc: Inscripcion) => sum + insc.edad, 0) / inscripciones.length).toFixed(1)
     : 0;
 
-  // Promedio de peso
+
   const promedioPeso = inscripciones.length > 0
     ? (inscripciones.reduce((sum: number, insc: Inscripcion) => sum + insc.peso, 0) / inscripciones.length).toFixed(1)
     : 0;
 
-  // Número de escuelas únicas
+ 
   const escuelasUnicas = new Set(inscripciones.map((insc: Inscripcion) => insc.nombreEscuela)).size;
 
   return (
